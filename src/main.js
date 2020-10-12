@@ -6,6 +6,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueRouter from 'vue-router'
 import router from './router'
 
+
 Vue.use(VueRouter)
 
 Vue.config.productionTip = false
