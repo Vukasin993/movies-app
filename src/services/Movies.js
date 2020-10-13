@@ -9,6 +9,10 @@ class Movies {
 
         return response.data
     }
+
+    deleteMovie(id) {
+        return this.axios.delete(`/movies/${id}`)
+    }
 }
 
 export const movies = new Movies();

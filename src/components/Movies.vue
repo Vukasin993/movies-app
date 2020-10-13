@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>Movies</h1>
+
   </div>
 </template>
 
@@ -9,7 +10,9 @@ export default {
   name: 'AppMovies',
   props: {
     
-  }
+  },
+
+  
 }
 </script>
 

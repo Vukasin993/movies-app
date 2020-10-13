@@ -1,12 +1,20 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/" class="navbar-brand">Movies</router-link> 
-      
-    </div>
+    <NavBar />
     <router-view/>
   </div>
 </template>
+
+<script>
+import NavBar from './components/NavBar'
+
+export default {
+  name: 'App',
+  components: {
+    NavBar
+  }
+}
+</script>
 
 <style>
 #app {
