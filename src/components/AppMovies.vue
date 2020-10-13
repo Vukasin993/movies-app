@@ -1,14 +1,14 @@
 <template>
   <div class="hello">
     <h1>Movies</h1>
-    <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie"> 
+    <movie-card v-for="movie in movies" :key="movie.id" :movie="movie"> 
 
-    </MovieCard>
+    </movie-card>
   </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from '../vuex/store'
+import {mapGetters, mapActions} from 'vuex'
 import MovieCard from './MovieCard'
 
 export default {
@@ -16,37 +16,23 @@ export default {
   components: {
     MovieCard
   },
-      data () {
-        return {
-            movie: {
-                title: '',
-                director: '',
-                imageUrl: '',
-                duration: '',
-                releaseDate: '',
-                genre: ''
-                }
-         }
-},
+      
 
- computed: {
-        ...mapGetters([
-            'movies'
-        ])
-    },
+  computed: {
+      ...mapGetters([
+          'movies'
+      ])
+  },
 
     methods: {
 
         ...mapActions( [
-            'deleteMovie',
             'fetchMovies'
         ])
     },
 
-       created() {
-       this.fetchMovies();
-       const response = this.movies;
-       console.log(response);
+    created() {
+      this.fetchMovies();
     }
 }
 </script>

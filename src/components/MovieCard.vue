@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-center">
         <h2>Naslov</h2>
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="movie.imageUrl" alt="Card image cap">
+            <img class="card-img-top" :src="movie.imageUrl" alt="Card image cap">
             <div class="card-body">
             <h5 class="card-title">{{movie.title}}</h5>
             </div>
@@ -21,13 +21,11 @@
   </template>
 
   <script>
-    import {mapActions} from '../vuex/store'
+    import {mapActions} from 'vuex'
 
     export default {
     name: 'MovieCard',
-    mounted() {
-        console.log(this.movie);
-    },
+
     props: {
         movie:Object
     },
@@ -36,8 +34,7 @@
     methods: {
 
         ...mapActions( [
-            'deleteMovie',
-            'fetchMovies'
+            'deleteMovie'
         ])
     },
 

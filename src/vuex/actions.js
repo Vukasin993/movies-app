@@ -2,7 +2,7 @@ import {movies} from '../services/Movies'
 
 export const actions= {
     async fetchMovies(state) {
-        const {data} = await movies.getAll();
+        const data = await movies.getAll();
         state.commit('setMovies', data);
     },
 
