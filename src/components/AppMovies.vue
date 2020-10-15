@@ -1,15 +1,19 @@
 <template>
   <div class="hello">
     <h1>Movies</h1>
+       <div>
+      Number of selected: {{numberOfSelectedMovies}}
+    </div>
     <div class="d-flex justify-content-around  flex-wrap">
     
-    <movie-card v-for="movie in filteredMovies" :key="movie.id" :movie="movie" > 
+    <movie-card v-for="movie in filteredMovies" :key="movie.id" :movie="movie" @movie-selected="handleMovieSelected"> 
       
 
     </movie-card>
     <div v-if="!filteredMovies.length">
         <h1>Sorry, there is no movie with that title</h1>
     </div>
+ 
     </div>
   </div>
 </template>
@@ -26,11 +30,21 @@ export default {
     MovieCard
   },
 
+  data() {
+    return {
+      selectedMovies: []
+    }
+  },
+
   computed: {
       ...mapGetters([
           'movies',
           'filteredMovies'
       ]),
+
+      numberOfSelectedMovies() {
+        return this.selectedMovies.length
+      }
 
       //   return this.movies.filter(movie => movie.title.toLowerCase().indexOf(this.searchText.toLowerCase()) >-1);
       //   //indexOf(this.searchTet) > -1, da se slova vezana u nizu nalae bilo gde u reci, -1 se odnosi na slova koja nisu u reci
@@ -43,7 +57,15 @@ export default {
             'fetchMovies'
         ]),
 
-    },
+ handleMovieSelected(movie) {
+console.log("Movie SELECTED", {movie});
+if (this.selectedMovies.find(m =>m.id == movie.id)) {
+  return;
+}
+this.selectedMovies.push(movie);
+ }
+ },
+
     created() {
       this.fetchMovies();
     },

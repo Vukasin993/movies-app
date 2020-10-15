@@ -14,6 +14,7 @@ export const store = new Vuex.Store({
 
     getters: {
         movies: ({movies}) => movies,
+        counter: ({counter}) => counter,
         filteredMovies: state =>state.movies.filter(movie =>movie.title.toLowerCase().indexOf(state.searchText.toLowerCase()) > -1)
     },
 
