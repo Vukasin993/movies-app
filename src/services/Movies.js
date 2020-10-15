@@ -13,6 +13,7 @@ class Movies {
     deleteMovie(id) {
         return axios.delete(`/movies/${id}`)
     }
+
 }
 
 export const movies = new Movies();

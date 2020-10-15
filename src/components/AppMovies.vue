@@ -2,9 +2,14 @@
   <div class="hello">
     <h1>Movies</h1>
     <div class="d-flex justify-content-around  flex-wrap">
-    <movie-card v-for="movie in movies" :key="movie.id" :movie="movie" > 
+    
+    <movie-card v-for="movie in filteredMovies" :key="movie.id" :movie="movie" > 
+      
 
     </movie-card>
+    <div v-if="!filteredMovies.length">
+        <h1>Sorry, there is no movie with that title</h1>
+    </div>
     </div>
   </div>
 </template>
@@ -12,29 +17,43 @@
 <script>
 import {mapGetters, mapActions} from 'vuex'
 import MovieCard from './MovieCard'
+import {store} from '../vuex/store'
+
 
 export default {
   name: 'AppMovies',
   components: {
     MovieCard
   },
-      
 
   computed: {
       ...mapGetters([
-          'movies'
-      ])
+          'movies',
+          'filteredMovies'
+      ]),
+
+      //   return this.movies.filter(movie => movie.title.toLowerCase().indexOf(this.searchText.toLowerCase()) >-1);
+      //   //indexOf(this.searchTet) > -1, da se slova vezana u nizu nalae bilo gde u reci, -1 se odnosi na slova koja nisu u reci
+      // }
   },
 
     methods: {
 
         ...mapActions( [
             'fetchMovies'
-        ])
-    },
+        ]),
 
+    },
     created() {
       this.fetchMovies();
+    },
+
+    beforeRouteEnter(to,from, next) {
+      console.log('AppMovies BeforeRouteEnter', to,from, next );
+      console.log("STORE: ", {movies: store.movies} )
+      // store.dispatch('fetchMovies').then(()=>{
+      //   next();
+      // });
     }
 }
 </script>

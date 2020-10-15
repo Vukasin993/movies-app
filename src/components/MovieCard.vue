@@ -1,5 +1,6 @@
     <template>
     <div >
+        
         <div class="card" style="width: 350px; margin-bottom: 30px;">
             <img class="card-img-top" :src="movie.imageUrl" alt="Card image cap">
             <div class="card-body">
@@ -37,6 +38,9 @@
         ])
     },
 
+    // created() {
+    //     console.log('movie card created', this.movie, { isUndefined: this.movie == undefined})
+    // }
 
 
     }
