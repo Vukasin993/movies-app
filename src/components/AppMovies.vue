@@ -4,9 +4,12 @@
        <div>
       Number of selected: {{numberOfSelectedMovies}}
     </div>
+
     <div class="d-flex justify-content-around  flex-wrap">
     
-    <movie-card v-for="movie in filteredMovies" :key="movie.id" :movie="movie" @movie-selected="handleMovieSelected"> 
+    <movie-card v-for="movie in filteredMovies" :key="movie.id" 
+      :movie="movie" @movie-selected="handleMovieSelected" 
+      :isSelected="getIsMovieSelected(movie)"> 
       
 
     </movie-card>
@@ -14,6 +17,11 @@
         <h1>Sorry, there is no movie with that title</h1>
     </div>
  
+    </div>
+
+    <div class="card-body">
+        <button type="button" @click="selectAll" class="btn btn-success">Select All</button>
+        <button type="button" @click="deselectAll" class="btn btn-danger">Deselect All</button>
     </div>
   </div>
 </template>
@@ -46,6 +54,8 @@ export default {
         return this.selectedMovies.length
       }
 
+
+
       //   return this.movies.filter(movie => movie.title.toLowerCase().indexOf(this.searchText.toLowerCase()) >-1);
       //   //indexOf(this.searchTet) > -1, da se slova vezana u nizu nalae bilo gde u reci, -1 se odnosi na slova koja nisu u reci
       // }
@@ -53,18 +63,31 @@ export default {
 
     methods: {
 
-        ...mapActions( [
-            'fetchMovies'
-        ]),
+      ...mapActions( [
+          'fetchMovies'
+      ]),
 
- handleMovieSelected(movie) {
-console.log("Movie SELECTED", {movie});
-if (this.selectedMovies.find(m =>m.id == movie.id)) {
-  return;
-}
-this.selectedMovies.push(movie);
- }
- },
+      handleMovieSelected(movie) {
+      console.log("Movie SELECTED", {movie});
+        if (this.getIsMovieSelected(movie)) {
+          return;
+        }
+        this.selectedMovies.push(movie);
+      },
+
+      getIsMovieSelected(movie) {
+        return !!this.selectedMovies.find(m=>m.id == movie.id); //{} ili null
+        //false true
+        //true false !!-pretvaranje u boolean
+      },
+
+      selectAll() {
+        this.selectedMovies = this.filteredMovies.map((movie) => movie);
+      },
+      deselectAll() {
+        this.selectedMovies = [];
+      },
+    },
 
     created() {
       this.fetchMovies();
