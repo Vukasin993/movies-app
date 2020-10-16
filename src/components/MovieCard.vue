@@ -8,7 +8,7 @@
             </div>
             <ul class="list-group list-group-flush" >
             <li class="list-group-item" :class="{'is-selected':isSelected}">{{movie.genre}}</li>
-            <li class="list-group-item" :class="{'is-selected':isSelected}">{{movie.duration}}</li>
+            <li class="list-group-item" :class="{'is-selected':isSelected}">{{movie.duration}} min</li>
             <li class="list-group-item" :class="{'is-selected':isSelected}">{{movie.director}}</li>
             <li class="list-group-item" :class="{'is-selected':isSelected}">{{movie.releaseDate}}</li>
             </ul>

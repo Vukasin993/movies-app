@@ -5,9 +5,18 @@
       Number of selected: {{numberOfSelectedMovies}}
     </div>
 
+    <div class="card-body">
+        <button type="button" @click="setSortingCriteria('title')" class="btn btn-success">Sort by title</button>
+        <button type="button" @click="setSortingCriteria('duration')" class="btn btn-danger">Sort by duration</button>
+    </div>
+
+    <div class="card-body">
+        <button type="button" @click="setSortingDirection(-1)" class="btn btn-success">Asc</button>
+        <button type="button" @click="setSortingDirection(1)" class="btn btn-danger">Desc</button>
+    </div>
     <div class="d-flex justify-content-around  flex-wrap">
     
-    <movie-card v-for="movie in filteredMovies" :key="movie.id" 
+    <movie-card v-for="movie in sortedFilteredMovies" :key="movie.id" 
       :movie="movie" @movie-selected="handleMovieSelected" 
       :isSelected="getIsMovieSelected(movie)"> 
       
@@ -40,19 +49,29 @@ export default {
 
   data() {
     return {
-      selectedMovies: []
+      selectedMovies: [],
+      sortingCriteria: 'title',
+      sortDirection: -1
     }
   },
 
   computed: {
       ...mapGetters([
-          'movies',
+          
           'filteredMovies'
       ]),
 
       numberOfSelectedMovies() {
         return this.selectedMovies.length
-      }
+      },
+
+      sortedFilteredMovies() {
+        return this.filteredMovies
+        .map((m)=>({ ...m, duration: parseInt(m.duration)}))
+        .sort((movieA, movieB) => 
+        (movieA[this.sortingCriteria] < movieB[this.sortingCriteria]
+         ? this.sortDirection : -1 * this.sortDirection))
+      },
 
 
 
@@ -87,6 +106,14 @@ export default {
       deselectAll() {
         this.selectedMovies = [];
       },
+      setSortingCriteria(field) {
+        this.sortingCriteria = field;
+     },
+      setSortingDirection(direction) {
+        this.sortDirection = direction;
+     }
+
+
     },
 
     created() {
