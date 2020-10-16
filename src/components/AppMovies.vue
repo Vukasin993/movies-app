@@ -16,7 +16,7 @@
     </div>
     <div class="d-flex justify-content-around  flex-wrap">
     
-    <movie-card v-for="movie in sortedFilteredMovies" :key="movie.id" 
+    <movie-card v-for="movie in moviesPage" :key="movie.id" 
       :movie="movie" @movie-selected="handleMovieSelected" 
       :isSelected="getIsMovieSelected(movie)"> 
       
@@ -32,26 +32,34 @@
         <button type="button" @click="selectAll" class="btn btn-success">Select All</button>
         <button type="button" @click="deselectAll" class="btn btn-danger">Deselect All</button>
     </div>
+     <pagination-buttons 
+     :num-of-items="sortedFilteredMovies.length"
+     @current-page-changed="goToPage"
+     />
   </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
-import MovieCard from './MovieCard'
-import {store} from '../vuex/store'
+import {mapGetters, mapActions} from 'vuex';
+import MovieCard from './MovieCard';
+import {store} from '../vuex/store';
+import PaginationButtons from './PaginationButtons';
 
+const PAGE_SIZE = 5;
 
 export default {
   name: 'AppMovies',
   components: {
-    MovieCard
+    MovieCard,
+    PaginationButtons
   },
 
   data() {
     return {
       selectedMovies: [],
       sortingCriteria: 'title',
-      sortDirection: -1
+      sortDirection: -1,
+      currentPage: 1,
     }
   },
 
@@ -73,13 +81,13 @@ export default {
          ? this.sortDirection : -1 * this.sortDirection))
       },
 
-
-
-      //   return this.movies.filter(movie => movie.title.toLowerCase().indexOf(this.searchText.toLowerCase()) >-1);
-      //   //indexOf(this.searchTet) > -1, da se slova vezana u nizu nalae bilo gde u reci, -1 se odnosi na slova koja nisu u reci
-      // }
+    moviesPage() {
+   return this.sortedFilteredMovies.slice(
+        (this.currentPage - 1) * PAGE_SIZE,
+        this.currentPage * PAGE_SIZE
+      );
   },
-
+  },
     methods: {
 
       ...mapActions( [
@@ -111,7 +119,11 @@ export default {
      },
       setSortingDirection(direction) {
         this.sortDirection = direction;
-     }
+     },
+     goToPage(page) {
+       this.currentPage = page;
+     },
+ 
 
 
     },
