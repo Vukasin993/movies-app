@@ -12,7 +12,7 @@
 
 </template>
 <script>
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 8;
 
 export default {
     name: 'PaginationButtons',

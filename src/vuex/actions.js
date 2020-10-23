@@ -11,5 +11,11 @@ export const actions= {
         movies.deleteMovie(id);
         console.log('akcija posle await')
         state.commit('deleteMovie', id)
+    },
+
+    addMovie(state) {
+        const data = movies.addMovie();
+        state.commit('addMovie', data);
+        
     }
 }

@@ -7,7 +7,10 @@ export const mutations = {
         state.movies = state.movies.filter(movies => movies.id !== id);
     },
 
-
+    addMovie(state, payload) {
+        state.movies = payload
+        
+    },
     setSearchText(state, searchText) {
         state.searchText = searchText;
     },

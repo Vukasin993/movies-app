@@ -1,7 +1,7 @@
     <template>
     <div >
         
-        <div class="card"  style="width: 350px; margin-bottom: 30px;">
+        <div class="card"  style="width: 300px; height: 800px; margin-bottom: 30px;">
             <img class="card-img-top" :src="movie.imageUrl" alt="Card image cap">
             <div class="card-body" :class="{'is-selected': isSelected}">
             <h5 class="card-title">{{movie.title}}</h5>
@@ -73,7 +73,11 @@
 
   <style scoped>
     img {
-        height: 500px;
+        height: 400px;
+    }
+
+    .card-body {
+        height: 150px;
     }
     .is-selected {
         background-color: rgb(178, 224, 224)

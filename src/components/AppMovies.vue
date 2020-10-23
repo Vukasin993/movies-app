@@ -45,7 +45,7 @@ import MovieCard from './MovieCard';
 import {store} from '../vuex/store';
 import PaginationButtons from './PaginationButtons';
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 8;
 
 export default {
   name: 'AppMovies',
