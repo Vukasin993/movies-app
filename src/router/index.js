@@ -21,7 +21,7 @@ const routes = [
     path: '/add-movie',
     name: 'add-movie',
     component: AddMovie,
-    meta: { isAuthRequired: true }
+    meta: { isAuthRequired: false }
   },
   {
     path: '/login',
