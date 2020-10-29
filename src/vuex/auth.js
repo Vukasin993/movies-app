@@ -51,10 +51,10 @@ export default {
 
         async register(context, user) {
             try { 
-                 const response = await authService.register(user)
+                 const response = await  axios.post('http://localhost:8000/api/register', user)
                  return response
             } catch(exception) {
-                context.commit('setErrors', exception.response.data.error)
+                context.commit('setErrors', exception)
             }
         },
         fetchUser(context, id) {

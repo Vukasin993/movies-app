@@ -6,13 +6,18 @@
           <div class="card-header">Register</div>
           <div class="card-body">
             <form class="form-horizontal" @submit.prevent="onSubmit">
+                <div class="alert alert-danger" v-if="errors.length"> 
+                <ul class="mb-0">
+                    <li v-for="(error,index) in errors" :key="index">{{error}}</li>
+                </ul>
+            </div>
               <div class="form-group">
                 <label for="name" class="cols-sm-2 control-label">Name</label>
                 <div class="cols-sm-10">
                   <div class="input-group">
                     <span class="input-group-addon"></span>
                     <input
-                      v-model="form.name"
+                      v-model="name"
                       type="text"
                       class="form-control"
                       name="name"
@@ -29,7 +34,7 @@
                   <div class="input-group">
                     <span class="input-group-addon"></span>
                     <input
-                      v-model="form.email"
+                      v-model="email"
                       type="text"
                       class="form-control"
                       name="email"
@@ -46,7 +51,7 @@
                     <span class="input-group-addon"></span>
                     <div></div>
                     <input
-                      v-model="form.password"
+                      v-model="password"
                       type="password"
                       class="form-control"
                       name="password"
@@ -62,7 +67,7 @@
                   <div class="input-group">
                     <span class="input-group-addon"></span>
                     <input
-                      v-model="form.password_confirmation"
+                      v-model="password_confirmation"
                       type="password"
                       class="form-control"
                       name="password_confirmation"
@@ -72,12 +77,9 @@
                   </div>
                 </div>
               </div>
-              <div class="form-check">
-                <input v-model="form.checked" type="checkbox" class="form-check-input" id="exampleCheck1" />
-                <label class="form-check-label" for="exampleCheck1">I accept terms and conditions</label>
-              </div>
+              
                 <br/>
-              <div v-if="error" class="alert alert-danger" role="alert">Damn son</div>
+              <div v-if="error" class="alert alert-danger" role="alert">Error</div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
               </div>
@@ -94,13 +96,12 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      form: {
+      
         name: "",
         email: "",
         password: "",
         password_confirmation: "",
-        checked: false
-      }
+        errors: []
     };
   },
   computed: {
@@ -110,17 +111,70 @@ export default {
   },
   methods: {
     ...mapActions({
-      register: "register"
+      register: "auth/register"
     }),
+
     onSubmit() {
-      // this.form.checked = !!this.form.checked;
-      this.register(this.form).then(() => {
-        if (this.error === null)
-          this.$router.push({
-            name: "login"
-          });
-      });
-    }
+
+        this.errors = [];
+
+            if(!this.name) {
+                this.errors.push('name is required.');
+            }
+
+             if(!this.email) {
+                this.errors.push('email is required.');
+            }
+
+             if(!this.password ) {
+                this.errors.push('password is required.');
+            }
+
+             if(!this.password_confirmation) {
+                this.errors.push('password_confirmation is required.');
+            }
+
+             if(this.password !== this.password_confirmation) {
+                     this.errors.push('Passwords are not matching.');
+                }
+
+            if (!this.errors.length) {
+                const user = {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password,
+                    password_confirmation: this.password_confirmation,
+                };
+                this.register(user);
+                this.$router.push('/login')
+                
+            } else {
+                console.log('Bad register');
+            }
+            
+        },
+
+
+
+    //   this.register(this.form).then(() => {
+    //     if (this.error === null)
+    //       this.$router.push({
+    //         name: "login"
+    //       });
+    //   });
+
+
+
+    //   this.register({
+    //       name: this.name,
+    //       email: this.email,
+    //       password: this.password
+    //   }).then(() => {
+    //     if (this.error === null)
+    //       this.$router.push('/login');
+    //   });
+
+    
   }
 };
 </script>
