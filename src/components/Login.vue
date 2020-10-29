@@ -46,12 +46,22 @@ export default {
                     password: this.password
                 }).then(() => {
                     if(this.error === null)
-                    this.$router.push({
-                    name: "movies"
-                    });
+                     this.$router.push('/movies')
                 });
             }
   
+
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
+
+
+
+
          
             // this.login(this.email, this.password);
             // console.log(this.email, this.password)
@@ -78,10 +88,3 @@ export default {
         //         this.$router.push('/movies')
         //     }
         // }
-    }
-}
-</script>
-
-<style scoped>
-
-</style>
