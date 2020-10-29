@@ -21,7 +21,7 @@
             </div>
             <label for="duration" class="col-sm-2 col-form-label">Duration</label>
             <div class="col-sm-10">
-            <input v-model="duration" type="text" class="form-control"  placeholder="duration">
+            <input v-model.number="duration" type="number" class="form-control"  placeholder="duration">
             </div>
             <label for="director" class="col-sm-2 col-form-label">Director</label>
             <div class="col-sm-10">
@@ -72,7 +72,7 @@ export default {
                 this.errors.push('duration is required.');
             }
 
-             if(!this.director) {
+             if(!this.director ) {
                 this.errors.push('director is required.');
             }
 

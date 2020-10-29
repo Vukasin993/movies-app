@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import authService from '../services/AuthService'
 
 
 
@@ -12,7 +12,15 @@ export default {
     },
 
     getters: {
-       
+        isUserAuthenticated(state) {
+            return !!state.token
+        },
+        errors(state) {
+            return state.errors
+        },
+        user(state) {
+            return JSON.parse(state.user)
+        }
     },
 
     mutations: {
@@ -40,10 +48,28 @@ export default {
                 context.commit('setErrors',exception)
             }
         },
-        // async attempt ({commit},token) {
-        //     commit('SET_TOKEN', token)
 
-            
-        // }
+        async register(context, user) {
+            try { 
+                 const response = await authService.register(user)
+                 return response
+            } catch(exception) {
+                context.commit('setErrors', exception.response.data.error)
+            }
+        },
+        fetchUser(context, id) {
+            return authService.get(id)
+                .then(
+                    response => { context.commit('setUser', response.data) }
+                )
+        },
+
+        logout(context) {
+            context.commit('setToken', null)
+            // localStorage.setItem('token', null) drugo resenje
+            localStorage.clear();
+            // localStorage.removeItem('token'),
+            // localStorage.removeItem('user',null)
+        },
     }
 }
