@@ -12,12 +12,13 @@ const routes = [
   {
     path: '/',
     redirect: '/movies',
-    meta: { isAuthRequired: false }
+    meta: { isAuthRequired: true }
   },
   {
     path: '/movies',
     name: 'app-movies',
-    component: AppMovies
+    component: AppMovies,
+    meta: { isAuthRequired: true }
   },
   {
     path: '/add-movie',

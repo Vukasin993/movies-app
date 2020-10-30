@@ -7,9 +7,7 @@ export const actions= {
     },
 
      deleteMovie(state, id) {
-        console.log('akcija')
         movies.deleteMovie(id);
-        console.log('akcija posle await')
         state.commit('deleteMovie', id)
     },
 

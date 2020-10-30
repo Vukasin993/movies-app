@@ -35,7 +35,7 @@
                     <span class="input-group-addon"></span>
                     <input
                       v-model="email"
-                      type="text"
+                      type="email"
                       class="form-control"
                       name="email"
                       id="email"
@@ -118,8 +118,8 @@ export default {
 
         this.errors = [];
 
-            if(!this.name) {
-                this.errors.push('name is required.');
+            if(!this.name || this.name.length < 6) {
+                this.errors.push('name is required or to short.');
             }
 
              if(!this.email) {
@@ -137,6 +137,7 @@ export default {
              if(this.password !== this.password_confirmation) {
                      this.errors.push('Passwords are not matching.');
                 }
+                
 
             if (!this.errors.length) {
                 const user = {
