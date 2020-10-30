@@ -45,8 +45,10 @@ export default {
                     email: this.email,
                     password: this.password
                 }).then(() => {
-                    if(this.error === null)
-                     this.$router.push({ name: "app-movies"});
+
+                    if(this.error === null) 
+                    console.log('asdf')
+                    this.$router.push({ name: "app-movies"});
                 });
             }
   
@@ -63,28 +65,3 @@ export default {
 
 
          
-            // this.login(this.email, this.password);
-            // console.log(this.email, this.password)
-            //  authService.login(this.email, this.password)
-        //         this.$router.push('/movies')
-        
-        // login() {
-        //     this.errors = [];
-
-        //     if (!this.email) {
-        //         this.errors.push("Email is required");
-        //     }
-        //      if (!this.password) {
-        //         this.errors.push("Password is required");
-        //     }
-
-        //     if (!this.errors.length) {
-        //         const data = {
-        //             email: this.email,
-        //             password: this.password
-        //         };
-
-        //         authService.login(data.email, data.password)
-        //         this.$router.push('/movies')
-        //     }
-        // }
