@@ -26,6 +26,10 @@ class Movies {
         return axios.delete(`/movies/${id}`)
     }
 
+    getOne(id) {
+        return axios.get(`/movies/${id}`);
+    }
+
 }
 
 export const movies = new Movies();

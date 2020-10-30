@@ -46,7 +46,7 @@ export default {
                     password: this.password
                 }).then(() => {
                     if(this.error === null)
-                     this.$router.push('/movies')
+                     this.$router.push({ name: "app-movies"});
                 });
             }
   

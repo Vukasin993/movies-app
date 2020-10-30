@@ -4,7 +4,7 @@
         <div class="card"  style="width: 300px; height: 800px; margin-bottom: 30px;">
             <img class="card-img-top" :src="movie.imageUrl" alt="Card image cap">
             <div class="card-body" :class="{'is-selected': isSelected}">
-            <h5 class="card-title">{{movie.title}}</h5>
+            <h5 class="card-title"><router-link :to="{ name: 'single-movie', params: {id: movie.id }}" > {{movie.title}}</router-link></h5>
             </div>
             <ul class="list-group list-group-flush" >
             <li class="list-group-item" :class="{'is-selected':isSelected}">{{movie.genre}}</li>

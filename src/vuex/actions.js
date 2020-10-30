@@ -17,5 +17,10 @@ export const actions= {
         const data = movies.addMovie();
         state.commit('addMovie', data);
         
+    },
+
+    getOne(state) {
+        const data = movies.getOne();
+        state.commit('getMovie', data)
     }
 }

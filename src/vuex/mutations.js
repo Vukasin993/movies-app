@@ -17,6 +17,10 @@ export const mutations = {
 
     setCounter(state, payload){
         state.counter = payload;
-    }
+    },
 
+    getMovie(state, id) {
+        console.log('uzimam jedan film mutacija');
+        state.movies = state.movies.filter(movies=> movies.id === id)
+    }
 }
